@@ -32,14 +32,33 @@ public class Main {
 
       //  String query = String.format("INSERT INTO students(name, age, marks) VALUES('%s', %o, %f)", "Rahul", 23, 74.5);
       //  String query = String.format("UPDATE students SET marks = %f where id = %d", 89.5, 2);
-          String query = "DELETE FROM students WHERE ID = 2";
+      // String query = "DELETE FROM students WHERE ID = 2";
+      // String query = "INSERT INTO students(name, age, marks) VALUES(?, ?, ?)";
+      //  String query = "SELECT marks FROM students WHERE id = ?";
+        String query = "UPDATE students SET marks = ? WHERE id = ?";
+      //  String query = "DELETE FROM students WHERE id = ?";
+      PreparedStatement preparedStatement = connection.prepareStatement(query);
+      //  preparedStatement.setInt(1,1);
+      //  preparedStatement.setString(1,  "Ankita");
+      //  preparedStatement.setInt(2  ,25);
+      //  preparedStatement.setDouble(3,  84.7);
+      preparedStatement.setDouble(1,  87.5);
+      preparedStatement.setInt(2,  3);
 
-      int rowsAffected = statement.executeUpdate(query); // to add, update and delete data
-      if (rowsAffected>0){
-        System.out.println("Data Inserted Successfully!");
-      } else {
-        System.out.println("Data Not Inserted");
-      }
+      //  ResultSet resultSet = preparedStatement.executeQuery();
+      //  if (resultSet.next()){
+      //     System.out.println("Marks: " + resultSet.getDouble("marks"));
+      //  } else {
+      //     System.out.println("Marks not found!!");
+      //  }
+
+        int rowsAffected = preparedStatement.executeUpdate(); // to add, update and delete data
+      //  int rowsAffected = statement.executeUpdate(query); // to add, update and delete data
+            if (rowsAffected>0){
+              System.out.println("Data Inserted Successfully!");
+            } else {
+              System.out.println("Data Not Inserted");
+            }
     } catch (SQLException e) {
       System.out.println("err2 " + e.getMessage());
     }
